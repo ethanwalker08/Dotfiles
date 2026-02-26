@@ -1,0 +1,13 @@
+.DS_Store
+.config/firebase
+.config/github-copilot
+.config/filezilla
+.config/GameMakerStudio2-LTS
+.config/.mono
+.config/configstore
+.config/iterm2
+.nvs/**/cache
+*lock*
+*state*
+*host*
+
