@@ -6,8 +6,7 @@
 .config/.mono
 .config/configstore
 .config/iterm2
-.nvs/**/cache
+.nvs/**
 *lock*
 *state*
 *host*
-
