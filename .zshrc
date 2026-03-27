@@ -70,14 +70,14 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=$HOME/.dotfiles/zsh_custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search npm)
+plugins=(git colorize brew flutter npm fzf uv azure zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,55 +113,16 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 alias python=python3
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
-###-begin-flutter-completion-###
-
-if type complete &>/dev/null; then
-  __flutter_completion() {
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           flutter completion -- "${COMP_WORDS[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -F __flutter_completion flutter
-elif type compdef &>/dev/null; then
-  __flutter_completion() {
-    si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 flutter completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef __flutter_completion flutter
-elif type compctl &>/dev/null; then
-  __flutter_completion() {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       flutter completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K __flutter_completion flutter
-fi
-
-###-end-flutter-completion-###
-
 # Add Flutter to PATH
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export NVS_HOME="$HOME/.nvs"
 [ -s "/opt/homebrew/Caskroom/nvs/1.7.1/nvs-1.7.1/nvs.sh" ] && . "/opt/homebrew/Caskroom/nvs/1.7.1/nvs-1.7.1/nvs.sh"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
+cd ~/Dev
+export PATH="/home/linuxbrew/.linuxbrew/opt/dotnet@8/bin:$PATH"
+export DOTNET_ROOT="/home/linuxbrew/.linuxbrew/opt/dotnet@8/libexec"
+source <(fzf --zsh)
+source nvs.sh
+nvs use 22.19.0
