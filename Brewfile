@@ -1,4 +1,3 @@
-tap "homebrew/services"
 tap "koekeishiya/formulae"
 tap "supabase/tap"
 brew "cowsay"
