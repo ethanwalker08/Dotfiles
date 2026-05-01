@@ -77,7 +77,7 @@ ZSH_CUSTOM=$HOME/.dotfiles/zsh_custom
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colorize brew flutter npm fzf uv azure zsh-autosuggestions)
+plugins=(git colorize brew flutter npm fzf uv azure zsh-autosuggestions npm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -120,7 +120,9 @@ export NVS_HOME="$HOME/.nvs"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
-cd ~/Dev
+if [[ -n "$NVIM_FLOATING_TERM_CWD" ]]; then
+  cd "$NVIM_FLOATING_TERM_CWD"
+fi
 export PATH="/home/linuxbrew/.linuxbrew/opt/dotnet@8/bin:$PATH"
 export DOTNET_ROOT="/home/linuxbrew/.linuxbrew/opt/dotnet@8/libexec"
 source <(fzf --zsh)
