@@ -6,6 +6,9 @@
 .config/.mono
 .config/configstore
 .config/iterm2
+.config/openspec
+.config/go
+.config/karabiner
 .nvs/**
 *lock*
 *state*
